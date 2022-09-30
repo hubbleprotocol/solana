@@ -209,7 +209,7 @@ impl BanksClient {
         commitment: CommitmentLevel,
     ) -> impl Future<Output = Result<(), BanksClientError>> + '_ {
         let mut ctx = context::current();
-        ctx.deadline += Duration::from_secs(50);
+        ctx.deadline += Duration::from_secs(80);
         self.process_transaction_with_commitment_and_context(ctx, transaction, commitment)
             .map(|result| match result? {
                 None => Err(BanksClientError::ClientError(
@@ -227,7 +227,7 @@ impl BanksClient {
         commitment: CommitmentLevel,
     ) -> impl Future<Output = Result<(), BanksClientError>> + '_ {
         let mut ctx = context::current();
-        ctx.deadline += Duration::from_secs(50);
+        ctx.deadline += Duration::from_secs(80);
         self.process_transaction_with_preflight_and_commitment_and_context(
             ctx,
             transaction,
