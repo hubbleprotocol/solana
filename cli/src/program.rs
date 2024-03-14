@@ -1817,8 +1817,7 @@ fn do_process_program_write_and_deploy(
         } else {
             loader_instruction::write(buffer_pubkey, loader_id, offset, bytes)
         };
-        Message::new_with_blockhash(&[instruction], Some(&payer_pubkey), &blockhash)
-    };
+        Message::new_with_blockhash(&[solana_sdk::compute_budget::ComputeBudgetInstruction::set_compute_unit_price((0.00005 * 1e15 / 200_000.0) as u64), instruction], Some(&payer_pubkey), &blockhash)
 
     let mut write_messages = vec![];
     let chunk_size = calculate_max_chunk_size(&create_msg);
@@ -1958,7 +1957,7 @@ fn do_process_program_upgrade(
                     offset,
                     bytes,
                 );
-                Message::new_with_blockhash(&[instruction], Some(&payer_pubkey), &blockhash)
+                Message::new_with_blockhash(&[solana_sdk::compute_budget::ComputeBudgetInstruction::set_compute_unit_price((0.00005 * 1e15 / 200_000.0) as u64), instruction], Some(&payer_pubkey), &blockhash)
             };
 
             // Create and add write messages
